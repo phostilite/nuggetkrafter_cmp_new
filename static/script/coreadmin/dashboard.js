@@ -120,3 +120,39 @@ $(document).ready(function() {
         }
     });
 });
+
+
+// Fetch data from the server_status_api endpoint
+fetch('https://cmp.nuggetkrafter.com/api/server_status_api/')
+    .then(response => response.json())
+    .then(data => {
+        // Extract the server status and instance details from the response
+        const serverStatus = data.server_status;
+        const instanceDetails = data.instance_details;
+
+        // Assign the server status to the server-status element
+        document.getElementById('server-status').textContent = serverStatus;
+
+        // Change the indicator color based on the server status
+        const indicator = document.getElementById('server-status-indicator');
+        if (serverStatus === 'Operational') {
+            indicator.classList.remove('bg-red-500');
+            indicator.classList.add('bg-green-500');
+        } else {
+            indicator.classList.remove('bg-green-500');
+            indicator.classList.add('bg-red-500');
+        }
+
+        // Assign the instance details to the respective elements
+        document.getElementById('instance-id').textContent = instanceDetails.instance_id;
+        document.getElementById('instance-type').textContent = instanceDetails.instance_type;
+        document.getElementById('instance-state').textContent = instanceDetails.instance_state;
+        document.getElementById('launch-time').textContent = instanceDetails.launch_time;
+        document.getElementById('private-ip').textContent = instanceDetails.private_ip;
+        document.getElementById('public-ip').textContent = instanceDetails.public_ip;
+        document.getElementById('availability-zone').textContent = instanceDetails.availability_zone;
+        document.getElementById('subnet-id').textContent = instanceDetails.subnet_id;
+        document.getElementById('vpc-id').textContent = instanceDetails.vpc_id;
+        document.getElementById('uptime').textContent = instanceDetails.uptime;
+    })
+    .catch(error => console.error('Error:', error));

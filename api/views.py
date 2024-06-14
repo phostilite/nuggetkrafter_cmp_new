@@ -1,5 +1,4 @@
 # Standard library imports
-import os
 import base64
 import json
 import logging
@@ -11,7 +10,7 @@ import time
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 import requests
@@ -22,7 +21,7 @@ from django.views.decorators.vary import vary_on_cookie
 
 # Local application imports
 from clients.models import Client, ClientUser
-from scorm.models import Course, Module, ScormAsset, ScormAssignment, ScormResponse, UserScormMapping, UserScormStatus
+from scorm.models import Course, Module, ScormAsset, ScormAssignment, UserScormMapping, UserScormStatus
 from scorm.utils import decrypt_data
 from .utils import check_assigned_scorm_seats_limit, check_assigned_scorm_validity, construct_launch_url, \
     create_user_on_cloudscorm
@@ -110,28 +109,6 @@ def validate_and_launch(request):
     else:
         logger.info("Failed to generate launch URL")
         return JsonResponse({"error": "Failed to generate launch URL"}, status=500)
-
-
-def get_scorm_data(request, client_id, scorm_id):
-    try:
-        assignment = ScormAssignment.objects.get(client_id=client_id, scorm_asset_id=scorm_id)
-        scorm = assignment.scorm_asset
-        data = {
-            "course_title": scorm.title,
-            "course_code": str(int(time.time())) + str(random.randint(100, 999)),
-            "cover_photo": request.build_absolute_uri(scorm.cover_photo.url),
-            "short_description": scorm.description,
-            "long_description": '',
-            "modules": [{"type": 'scorm', "scorm_title": scorm.title,
-                         "file": request.build_absolute_uri(assignment.client_scorm_file.url)}]
-        }
-        return JsonResponse(data, safe=False)
-    except ScormAssignment.DoesNotExist:
-        logger.exception("Scorm assignment not found")
-        return JsonResponse({"error": "Scorm assignment not found"}, status=404)
-    except Exception as e:
-        logger.exception("An error occurred")
-        return JsonResponse({"error": str(e)}, status=400)
 
 
 def user_scorm_status(request):
@@ -307,7 +284,6 @@ def sync_courses(request):
                 return JsonResponse({
                     "error": f"Failed to sync course to client LMS. Status code: {response.status_code}, Response: {response.text}"},
                     status=400)
-
         else:
             return JsonResponse({"message": "Course already synced"}, status=200)
 
@@ -416,7 +392,6 @@ def server_status_api(request):
             'instance_state': instance.state['Name'],
             'launch_time': instance.launch_time.isoformat(),
             'private_ip': instance.private_ip_address,
-            'public_ip': instance.public_ip_address,
             'public_ip': instance.public_ip_address,
             'availability_zone': instance.placement['AvailabilityZone'],
             'subnet_id': instance.subnet_id,

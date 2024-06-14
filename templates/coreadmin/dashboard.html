@@ -212,13 +212,32 @@
                         </table>
                     </div>
                     <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="system-health" role="tabpanel" aria-labelledby="system-health-tab">
-                        <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white">System Health</h2>
+                        <div class="flex items-center">
+                            <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white" id="system-health">System Health</h2>
+                            <span class="ml-2 flex w-3 h-3 bg-red-500 rounded-full" id="server-status-indicator"></span>
+                        </div>
                         <ul class="space-y-4 text-gray-500 dark:text-gray-400">
-                            <li>Server Status: <span class="text-green-600 dark:text-green-400">Operational</span></li>
-                            <li>Uptime: 99.99%</li>
-                            <li>Response Time: 120ms</li>
-                            <li>Database Health: <span class="text-green-600 dark:text-green-400">Good</span></li>
-                            <li>Last Backup: 1 hour ago</li>
+                            <div class="grid grid-cols-4 gap-4">
+                                <div class="space-y-4 text-gray-500 dark:text-gray-400">
+                                    <li>Server Status: <span id="server-status"></span></li>
+                                    <li>Instance ID: <span id="instance-id"></span></li>
+                                    <li>Instance Type: <span id="instance-type"></span></li>
+                                </div>
+                                <div class="space-y-4 text-gray-500 dark:text-gray-400">
+                                    <li>Instance State: <span id="instance-state"></span></li>
+                                    <li>Launch Time: <span id="launch-time"></span></li>
+                                    <li>Private IP: <span id="private-ip"></span></li>
+                                </div>
+                                <div class="space-y-4 text-gray-500 dark:text-gray-400">
+                                    <li>Public IP: <span id="public-ip"></span></li>
+                                    <li>Availability Zone: <span id="availability-zone"></span></li>
+                                    <li>Subnet ID: <span id="subnet-id"></span></li>
+                                </div>
+                                <div class="space-y-4 text-gray-500 dark:text-gray-400">
+                                    <li>VPC ID: <span id="vpc-id"></span></li>
+                                    <li>Uptime: <span id="uptime"></span></li>
+                                </div>
+                            </div>
                         </ul>
                     </div>
                     <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="faq" role="tabpanel" aria-labelledby="faq-tab">
