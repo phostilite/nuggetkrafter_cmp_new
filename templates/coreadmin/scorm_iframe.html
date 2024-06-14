@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCORM Content</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .scorm-iframe {
+            height: 100%;
+            width: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe class="scorm-iframe" src="{{ scorm.launch_url }}"></iframe>
+</body>
+</html>

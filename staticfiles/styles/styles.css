@@ -1,0 +1,28 @@
+:root {
+    --rpurple: #4B006E;       /* Your original rpurple color */
+    --rpurple-500: #6F00A1;   /* A lighter shade */
+    --rpurple-700: #3D0055;   /* A slightly darker shade */
+    --rpurple-900: #1F002B;   /* The darkest shade */
+  }
+
+  
+  .upload-button {
+    background-color: var(--rpurple); /* Default to the original color */
+    color: white;
+    /* ... other styles (padding, font, border, etc.) */
+  }
+  
+  .upload-button:hover {
+    background-color: var(--rpurple-700); /* Darker on hover */
+  }
+  
+  .upload-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px var(--rpurple-500); /* Lighter ring on focus */
+  }
+  
+  /* Additional Classes for Different Shades */
+  .bg-rpurple-500 { background-color: var(--rpurple-500); }
+  .bg-rpurple-700 { background-color: var(--rpurple-700); }
+  .bg-rpurple-900 { background-color: var(--rpurple-900); }
+  

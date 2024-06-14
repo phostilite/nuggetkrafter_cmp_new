@@ -1,0 +1,293 @@
+{% extends '../base.html' %}
+{% block content %}
+{% load static %}
+{% include './navbar.html' %}
+{% include './sidebar.html' %}
+<div class="p-4 sm:ml-64 mt-14">
+    <div class="p-4 rounded-lg dark:border-gray-700">
+        <div class="relative overflow-x-auto">    
+
+            <!-- FIRST ROW START -->
+             
+            <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="sm:hidden">
+                    <label for="tabs" class="sr-only">Select tab</label>
+                    <select id="tabs" class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option>Statistics</option>
+                        <option>Recent Activities</option>
+                        <option>Notifications</option>
+                    </select>
+                </div>
+                <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400 rtl:divide-x-reverse" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
+                    <li class="w-full">
+                        <button id="stats-tab" data-tabs-target="#stats" type="button" role="tab" aria-controls="stats" aria-selected="true" class="inline-block w-full p-4 rounded-ss-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Statistics</button>
+                    </li>
+                    <li class="w-full">
+                        <button id="recent-activities-tab" data-tabs-target="#recent-activities" type="button" role="tab" aria-controls="recent-activities" aria-selected="false" class="inline-block w-full p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Recent Activities</button>
+                    </li>
+                    <li class="w-full">
+                        <button id="notifications-tab" data-tabs-target="#notifications" type="button" role="tab" aria-controls="notifications" aria-selected="false" class="inline-block w-full p-4 rounded-se-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Notifications</button>
+                    </li>
+                </ul>
+                <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+                        <dl class="grid max-w-screen-xl grid-cols-2 gap-8 p-4 mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-6 dark:text-white sm:p-8">
+                            <div class="flex flex-col items-center justify-center">
+                                <dt class="mb-2 text-3xl font-extrabold" id="clients">0</dt>
+                                <dd class="text-gray-500 dark:text-gray-400">Clients</dd>
+                            </div>
+                            <div class="flex flex-col items-center justify-center">
+                                <dt class="mb-2 text-3xl font-extrabold" id="users">0</dt>
+                                <dd class="text-gray-500 dark:text-gray-400">Users</dd>
+                            </div>
+                            <div class="flex flex-col items-center justify-center">
+                                <dt class="mb-2 text-3xl font-extrabold" id="scorm_packages">0</dt>
+                                <dd class="text-gray-500 dark:text-gray-400">SCORM Packages</dd>
+                            </div>
+                            <div class="flex flex-col items-center justify-center">
+                                <dt class="mb-2 text-3xl font-extrabold" id="assignments">0</dt>
+                                <dd class="text-gray-500 dark:text-gray-400">Assignments</dd>
+                            </div>
+                            <div class="flex flex-col items-center justify-center">
+                                <dt class="mb-2 text-3xl font-extrabold" id="resets">0</dt>
+                                <dd class="text-gray-500 dark:text-gray-400">Resets</dd>
+                            </div>
+                            <div class="flex flex-col items-center justify-center">
+                                <dt class="mb-2 text-3xl font-extrabold" id="status_checks">0</dt>
+                                <dd class="text-gray-500 dark:text-gray-400">Status Checks</dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="recent-activities" role="tabpanel" aria-labelledby="recent-activities-tab">
+                        <h2 class="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">Recent Activities</h2>
+                        <!-- List -->
+                        <ul class="space-y-4 text-gray-500 dark:text-gray-400">
+                            <li>John Doe uploaded a new SCORM package - 1 hour ago</li>
+                            <li>Jane Smith assigned a package to Client A - 2 hours ago</li>
+                            <li>Michael Johnson completed a SCORM package - 3 hours ago</li>
+                            <li>Admin reset progress for User B - 4 hours ago</li>
+                            <li>System performed a status check - 5 hours ago</li>
+                        </ul>
+                    </div>
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+                        <h2 class="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">Notifications</h2>
+                        <ul class="space-y-4 text-gray-500 dark:text-gray-400">
+                            <li>New SCORM package available for review.</li>
+                            <li>System maintenance scheduled for midnight.</li>
+                            <li>Client B has requested a new package assignment.</li>
+                            <li>User C reported an issue with a package.</li>
+                            <li>Admin permissions updated successfully.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>   
+
+            <!-- FIRST ROW END -->
+
+            <!-- SECOND ROW START -->
+
+            <div class="w-full mt-10 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="sm:hidden">
+                    <label for="tabs" class="sr-only">Select tab</label>
+                    <select id="tabs" class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option>Detailed Analytics</option>
+                        <option>Recent Activities</option>
+                        <option>Notifications</option>
+                    </select>
+                </div>
+                <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400 rtl:divide-x-reverse" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
+                    <li class="w-full">
+                        <button id="detailed-analytics-tab" data-tabs-target="#detailed-analytics" type="button" role="tab" aria-controls="detailed-analytics" aria-selected="true" class="inline-block w-full p-4 rounded-ss-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Detailed Analytics</button>
+                    </li>
+                    <li class="w-full">
+                        <button id="user-management-tab" data-tabs-target="#user-management" type="button" role="tab" aria-controls="user-management" aria-selected="false" class="inline-block w-full p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">User Management</button>
+                    </li>
+                    <li class="w-full">
+                        <button id="client-management-tab" data-tabs-target="#client-management" type="button" role="tab" aria-controls="client-management" aria-selected="false" class="inline-block w-full p-4 rounded-se-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Client Management</button>
+                    </li>
+                </ul>
+                <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="detailed-analytics" role="tabpanel" aria-labelledby="detailed-analytics-tab">
+                            <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white">Detailed Analytics</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">User Engagement</h3>
+                                    <canvas id="userEngagementChart"></canvas>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Package Performance</h3>
+                                    <canvas id="packagePerformanceChart"></canvas>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Completion Rates</h3>
+                                    <canvas id="completionRatesChart"></canvas>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="user-management" role="tabpanel" aria-labelledby="user-management-tab">
+                        <h2 class="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">User Management</h2>
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th class="px-6 py-3">Username</th>
+                                    <th class="px-6 py-3">Email</th>
+                                    <th class="px-6 py-3">Role</th>
+                                    <th class="px-6 py-3">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">John Doe</td>
+                                    <td class="px-6 py-4">john@example.com</td>
+                                    <td class="px-6 py-4">User</td>
+                                    <td class="px-6 py-4"><button class="text-blue-600 dark:text-blue-500 hover:underline">Edit</button></td>
+                                </tr>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">Jane Smith</td>
+                                    <td class="px-6 py-4">jane@example.com</td>
+                                    <td class="px-6 py-4">Admin</td>
+                                    <td class="px-6 py-4"><button class="text-blue-600 dark:text-blue-500 hover:underline">Edit</button></td>
+                                </tr>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">Michael Johnson</td>
+                                    <td class="px-6 py-4">michael@example.com</td>
+                                    <td class="px-6 py-4">User</td>
+                                    <td class="px-6 py-4"><button class="text-blue-600 dark:text-blue-500 hover:underline">Edit</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="client-management" role="tabpanel" aria-labelledby="client-management-tab">
+                        <h2 class="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">Client Management</h2>
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th class="px-6 py-3">Client Name</th>
+                                    <th class="px-6 py-3">Email</th>
+                                    <th class="px-6 py-3">Packages</th>
+                                    <th class="px-6 py-3">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">Client A</td>
+                                    <td class="px-6 py-4">clienta@example.com</td>
+                                    <td class="px-6 py-4">5</td>
+                                    <td class="px-6 py-4"><button class="text-blue-600 dark:text-blue-500 hover:underline">Manage</button></td>
+                                </tr>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">Client B</td>
+                                    <td class="px-6 py-4">clientb@example.com</td>
+                                    <td class="px-6 py-4">3</td>
+                                    <td class="px-6 py-4"><button class="text-blue-600 dark:text-blue-500 hover:underline">Manage</button></td>
+                                </tr>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">Client C</td>
+                                    <td class="px-6 py-4">clientc@example.com</td>
+                                    <td class="px-6 py-4">7</td>
+                                    <td class="px-6 py-4"><button class="text-blue-600 dark:text-blue-500 hover:underline">Manage</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>   
+
+            <!-- SECOND ROW END -->
+
+             <!-- THIRD ROW START -->
+
+             <div class="w-full mt-10 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="sm:hidden">
+                    <label for="tabs" class="sr-only">Select tab</label>
+                    <select id="tabs" class="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option>Support Tickets</option>
+                        <option>System Health</option>
+                        <option>Frequently Asked Questions</option>
+                    </select>
+                </div>
+                <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400 rtl:divide-x-reverse" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
+                    <li class="w-full">
+                        <button id="support-tickets-tab" data-tabs-target="#support-tickets" type="button" role="tab" aria-controls="support-tickets" aria-selected="true" class="inline-block w-full p-4 rounded-ss-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Support Tickets</button>
+                    </li>
+                    <li class="w-full">
+                        <button id="system-health-tab" data-tabs-target="#system-health" type="button" role="tab" aria-controls="system-health" aria-selected="false" class="inline-block w-full p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">System Health</button>
+                    </li>
+                    <li class="w-full">
+                        <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="false" class="inline-block w-full p-4 rounded-se-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Frequently Asked Questions</button>
+                    </li>
+                </ul>
+                <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="support-tickets" role="tabpanel" aria-labelledby="support-tickets-tab">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th class="px-6 py-3">Ticket ID</th>
+                                    <th class="px-6 py-3">User</th>
+                                    <th class="px-6 py-3">Issue</th>
+                                    <th class="px-6 py-3">Status</th>
+                                    <th class="px-6 py-3">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">12345</td>
+                                    <td class="px-6 py-4">John Doe</td>
+                                    <td class="px-6 py-4">Login Issue</td>
+                                    <td class="px-6 py-4">Open</td>
+                                    <td class="px-6 py-4"><button class="text-blue-600 dark:text-blue-500 hover:underline">Resolve</button></td>
+                                </tr>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">12346</td>
+                                    <td class="px-6 py-4">Jane Smith</td>
+                                    <td class="px-6 py-4">Package Upload Error</td>
+                                    <td class="px-6 py-4">In Progress</td>
+                                    <td class="px-6 py-4"><button class="text-blue-600 dark:text-blue-500 hover:underline">Resolve</button></td>
+                                </tr>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">12347</td>
+                                    <td class="px-6 py-4">Michael Johnson</td>
+                                    <td class="px-6 py-4">Assignment Issue</td>
+                                    <td class="px-6 py-4">Closed</td>
+                                    <td class="px-6 py-4"><button class="text-blue-600 dark:text-blue-500 hover:underline">View</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="system-health" role="tabpanel" aria-labelledby="system-health-tab">
+                        <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white">System Health</h2>
+                        <ul class="space-y-4 text-gray-500 dark:text-gray-400">
+                            <li>Server Status: <span class="text-green-600 dark:text-green-400">Operational</span></li>
+                            <li>Uptime: 99.99%</li>
+                            <li>Response Time: 120ms</li>
+                            <li>Database Health: <span class="text-green-600 dark:text-green-400">Good</span></li>
+                            <li>Last Backup: 1 hour ago</li>
+                        </ul>
+                    </div>
+                    <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+                        <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white">Frequently Asked Questions</h2>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow">
+                                <h3 class="font-semibold text-lg text-gray-900 dark:text-white">How to upload a SCORM package?</h3>
+                                <p class="text-gray-500 dark:text-gray-400 mt-2">To upload a SCORM package, navigate to the Upload section, select the file, and click the upload button. Ensure the file is in the correct format.</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow">
+                                <h3 class="font-semibold text-lg text-gray-900 dark:text-white">How to assign a package to a client?</h3>
+                                <p class="text-gray-500 dark:text-gray-400 mt-2">Go to the Client Management section, select the client, and choose the package you want to assign. Click the assign button to complete the process.</p>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow">
+                                <h3 class="font-semibold text-lg text-gray-900 dark:text-white">How to track user progress?</h3>
+                                <p class="text-gray-500 dark:text-gray-400 mt-2">User progress can be tracked from the User Management section. Select a user to view detailed progress reports and activity logs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+
+            <!-- THIRD ROW END -->
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'script/coreadmin/dashboard.js' %}"></script>
+{% endblock %}
