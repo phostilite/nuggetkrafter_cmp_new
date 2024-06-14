@@ -18,7 +18,6 @@ import requests
 import boto3
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
-from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
 # Local application imports
@@ -28,6 +27,7 @@ from scorm.utils import decrypt_data
 from .utils import check_assigned_scorm_seats_limit, check_assigned_scorm_validity, construct_launch_url, \
     create_user_on_cloudscorm
 from .models import Statistics, Activity, Notification
+from django.utils.dateformat import format
 
 logger = logging.getLogger(__name__)
 
@@ -305,8 +305,8 @@ def sync_courses(request):
                 logger.error(
                     f"Failed to sync course to client LMS. Status code: {response.status_code}, Response: {response.text}")
                 return JsonResponse({
-                                        "error": f"Failed to sync course to client LMS. Status code: {response.status_code}, Response: {response.text}"},
-                                    status=400)
+                    "error": f"Failed to sync course to client LMS. Status code: {response.status_code}, Response: {response.text}"},
+                    status=400)
 
         else:
             return JsonResponse({"message": "Course already synced"}, status=200)
@@ -372,7 +372,6 @@ def reset_user_scorm_status(request):
 
 
 def server_status_api(request):
-    logger = logging.getLogger(__name__)
     logger.info("------ Starting server_status_api request ------")
     try:
         session = boto3.Session(
@@ -471,7 +470,9 @@ def activities_view(request):
         limit = int(request.GET.get('limit', 5))
         activities = Activity.objects.order_by('-timestamp')[:limit]
         activities_data = [
-            {'user': activity.user.username, 'activity_type': activity.activity_type, 'timestamp': activity.timestamp}
+            {
+                'message': f'{activity.user.first_name} {activity.user.last_name} {activity.activity_type} at {format(activity.timestamp, "jS F Y H:i:s")}',
+            }
             for activity in activities]
         return JsonResponse({'activities_data': activities_data})
     except Exception as e:
@@ -489,3 +490,47 @@ def notifications_view(request):
     except Exception as e:
         logger.error(f'An error occurred while fetching notifications: {str(e)}')
         return JsonResponse({'error': 'An error occurred while fetching notifications'}, status=500)
+
+
+def fetch_client_users(request):
+    try:
+        limit = int(request.GET.get('limit', 5))
+        client_users = ClientUser.objects.all()[:limit]
+        client_users_data = [
+            {
+                'id': client_user.id,
+                'first_name': client_user.first_name,
+                'last_name': client_user.last_name,
+                'email': client_user.email,
+                'client': f'{client_user.client.first_name} {client_user.client.last_name}',
+                'learner_id': client_user.learner_id,
+                'cloudscorm_user_id': client_user.cloudscorm_user_id,
+                'scorm_consumed': client_user.scorm_consumed,
+            }
+            for client_user in client_users
+        ]
+        return JsonResponse({'client_users_data': client_users_data})
+    except Exception as e:
+        logger.error(f'An error occurred while fetching client users: {str(e)}')
+        return JsonResponse({'error': 'An error occurred while fetching client users'}, status=500)
+
+
+def fetch_clients(request):
+    try:
+        limit = int(request.GET.get('limit', 5))
+        clients = Client.objects.all()[:limit]
+        clients_data = [
+            {
+                'id': client.id,
+                'first_name': client.first_name,
+                'last_name': client.last_name,
+                'email': client.email,
+                'contact_phone': client.contact_phone,
+                'company': client.company,
+            }
+            for client in clients
+        ]
+        return JsonResponse({'clients_data': clients_data})
+    except Exception as e:
+        logger.error(f'An error occurred while fetching clients: {str(e)}')
+        return JsonResponse({'error': 'An error occurred while fetching clients'}, status=500)

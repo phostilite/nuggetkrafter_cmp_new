@@ -4,18 +4,15 @@ from django.http import HttpResponse, FileResponse, Http404
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
 import os
-import json
 import logging
-import requests
-from django.conf import settings
-from django.http import HttpResponseBadRequest
-from django.core.exceptions import ValidationError
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
 from clients.models import Client
 from .models import ScormAsset, ScormAssignment, ScormResponse, UserScormMapping, UserScormStatus
 from .forms import AssignSCORMForm
+from api.models import Activity, Notification
 
 def get_all_scorms(request):
     try:
@@ -53,4 +50,9 @@ def download_scorm(request, client_id, scorm_id):
     filename = f"{client.first_name}_{client_id}_{scorm.title}_wrapper.zip"  
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
 
+    Activity.objects.create(
+        user=request.user,
+        activity_type=f'downloaded SCORM wrapper {filename}',
+        timestamp=datetime.now()
+    )
     return response
