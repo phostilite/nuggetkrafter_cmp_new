@@ -10,6 +10,15 @@ from .utils import encrypt_data, decrypt_data, create_modified_scorm_wrapper
 
 logger = logging.getLogger(__name__)
 
+
+class ScormAssetForm(forms.ModelForm):
+    scorm_file = forms.FileField()
+
+    class Meta:
+        model = ScormAsset
+        fields = ['title', 'short_description', 'long_description',
+                  'course_code', 'category', 'duration', 'cover_photo', 'scorm_file']
+
 class AssignSCORMForm(forms.ModelForm):
     scorms = forms.ModelMultipleChoiceField(
         queryset=ScormAsset.objects.all(), widget=forms.CheckboxSelectMultiple

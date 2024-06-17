@@ -3,7 +3,9 @@ from clients.models import Client, ClientUser
 
 class ScormAsset(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    short_description = models.TextField(blank=True, null=True)
+    long_description = models.TextField(null=True, blank=True)
+    course_code = models.CharField(max_length=50, blank=True, null=True)
     category = models.CharField(max_length=50, blank=True)
     duration = models.DurationField(blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True)

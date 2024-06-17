@@ -160,9 +160,11 @@ CACHES = {
     }
 }
 
-API_URL = os.getenv('API_URL')
-API_TOKEN1 = os.getenv('API_TOKEN1')
+API_URL1 = os.getenv('API_URL1')
+API_TOKEN1 = os.getenv('API_TOKEN2')
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 INSTANCE_ID = os.getenv('INSTANCE_ID')
+
+MAX_UPLOAD_SIZE = 2147483648

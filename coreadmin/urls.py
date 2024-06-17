@@ -1,12 +1,14 @@
 from django.urls import path
 
 from .views import dashboard, client_list, client_profile, client_user_list, manage_scorm, assign_scorm, scorm_iframe, get_client_details, client_update_view, get_user_details, user_update_view, scorm_list
+from scorm.views import ScormUploadView
 
 urlpatterns = [
     path('dashboard/', dashboard, name='coreadmin_dashboard'),
 
     path('scorm/', scorm_list, name='scorm_list'),
     path('scorm/<int:scorm_id>/', scorm_iframe, name='scorm_iframe'),
+    path('scorm/upload/', ScormUploadView.as_view(), name='scorm_upload'),
 
     path('clients/', client_list, name='client_list'),
     path('clients/<int:client_id>/', client_profile, name='client_profile'),
@@ -17,6 +19,4 @@ urlpatterns = [
     path('clients/<int:client_id>/update/', client_update_view, name='client_update_view'),
     path('clients/<int:client_id>/users/<int:user_id>/details/', get_user_details, name='get_user_details'),
     path('clients/<int:client_id>/users/<int:user_id>/update/', user_update_view, name='user_update_view'),
-
-    
 ]
