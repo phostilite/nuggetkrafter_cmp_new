@@ -13,7 +13,7 @@
             <nav class="flex mb-2.5" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="{% url 'client_list' %}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="{% url 'client_list' %}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-purple-600 dark:text-gray-400 dark:hover:text-white">
                     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                     </svg>
@@ -25,7 +25,7 @@
                       <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                       </svg>
-                      <a href="{% url 'client_user_list' client.id %}" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Users</a>
+                      <a href="{% url 'client_user_list' client.id %}" class="ms-1 text-sm font-medium text-gray-700 hover:text-purple-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Users</a>
                     </div>
                   </li>
                 </ol>
@@ -53,8 +53,8 @@
                   </a>
                 </li>
                 <li class="me-2">
-                  <a href="{% url 'client_user_list' client.id %}" class="inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group">
-                    <svg class="w-4 h-4 me-2 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                  <a href="{% url 'client_user_list' client.id %}" class="inline-flex items-center justify-center p-4 text-purple-600 border-b-2 border-purple-600 rounded-t-lg active dark:text-purple-500 dark:border-purple-500 group">
+                    <svg class="w-4 h-4 me-2 text-purple-600 dark:text-purple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                       <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
                     </svg>Users
                   </a>
@@ -77,31 +77,31 @@
                     <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input id="filter-radio-example-1" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="filter-radio-example-1" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-1" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last day</label>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input checked id="filter-radio-example-2" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input checked id="filter-radio-example-2" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-2" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 7 days</label>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input id="filter-radio-example-3" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="filter-radio-example-3" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-3" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 30 days</label>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input id="filter-radio-example-4" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="filter-radio-example-4" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-4" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last month</label>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input id="filter-radio-example-5" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="filter-radio-example-5" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-5" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last year</label>
                         </div>
                     </li>
@@ -115,7 +115,7 @@
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <input type="text" id="table-search-users" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users" />
+                    <input type="text" id="table-search-users" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Search for users" />
                 </div>
                 <div class="relative">
                     <a href="#">
@@ -154,15 +154,15 @@
                       <div class="font-normal text-gray-500">{{ user.scorm_consumed }}</div>
                     </td>
                     <td class="px-6 py-4 flex items-center space-x-2">
-                        <a href="#" type="button" data-client-id="{{ client.id }}" data-user-id="{{ user.id }}" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline edit-user-link" data-popover-target="popover-user-edit-details-{{ user.id }}" data-popover-placement="bottom">
+                        <a href="#" type="button" data-client-id="{{ client.id }}" data-user-id="{{ user.id }}" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-purple-600 dark:text-purple-500 hover:underline edit-user-link" data-popover-target="popover-user-edit-details-{{ user.id }}" data-popover-placement="bottom">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 512 512">
                               <path d="M 399.37891 56.253906 A 45 45 0 0 0 368.2168 69.429688 L 189.80859 247.83789 A 10 10 0 0 0 187.24414 252.23633 L 163.78125 336.9375 A 10 10 0 0 0 176.08789 349.24414 L 260.78711 325.78125 A 10 10 0 0 0 265.1875 323.21484 L 443.5918 144.80469 A 45.052 45.052 0 0 0 443.5918 81.164062 L 431.85547 69.429688 A 45 45 0 0 0 399.37891 56.253906 z M 400.40234 76.25 A 25 25 0 0 1 417.71484 83.570312 L 429.44922 95.306641 A 25.029 25.029 0 0 1 429.44922 130.66211 L 418.84375 141.26758 L 371.75391 94.177734 L 382.35938 83.570312 A 25 25 0 0 1 400.40234 76.25 z M 105.22852 95.160156 A 50.057 50.057 0 0 0 55.228516 145.16016 L 55.228516 405.75195 A 50.057 50.057 0 0 0 105.22852 455.75195 L 385.81836 455.75195 A 50.057 50.057 0 0 0 435.81836 405.75195 L 435.81836 316.96094 A 10 10 0 0 0 425.81836 306.96094 A 10 10 0 0 0 415.81836 316.96094 L 415.81836 405.75195 A 30.034 30.034 0 0 1 385.81836 435.75195 L 105.22852 435.75195 A 30.034 30.034 0 0 1 75.228516 405.75195 L 75.228516 145.16016 A 30.034 30.034 0 0 1 105.22852 115.16016 L 194.01953 115.16016 A 10 10 0 0 0 194.01953 95.160156 L 105.22852 95.160156 z M 357.60938 108.32031 L 404.69922 155.41016 L 258.68555 301.42773 L 211.59961 254.33594 L 357.60938 108.32031 z M 202.19141 273.21289 L 239.81445 310.83594 L 187.77539 325.25195 L 202.19141 273.21289 z"></path>
                             </svg>
                         </a>
-                        <a href="#" type="button" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" data-popover-target="popover-reset-user-data-{{ user.id }}" data-popover-placement="bottom">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50">
-                                <path d="M 25 2 C 12.309534 2 2 12.309534 2 25 C 2 37.690466 12.309534 48 25 48 C 37.690466 48 48 37.690466 48 25 A 1.0001 1.0001 0 1 0 46 25 C 46 36.609534 36.609534 46 25 46 C 13.390466 46 4 36.609534 4 25 C 4 13.390466 13.390466 4 25 4 C 31.692686 4 37.635193 7.130711 41.480469 12 L 35 12 A 1.0001 1.0001 0 1 0 35 14 L 43.449219 14 L 45 14 L 45 4 A 1.0001 1.0001 0 0 0 43.984375 2.9863281 A 1.0001 1.0001 0 0 0 43 4 L 43 10.699219 C 38.785186 5.4020866 32.287796 2 25 2 z"></path>
-                            </svg>
+                        <a href="{% url 'user_profile' client.id user.id %}">
+                              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 50 50">
+                                <path d="M 9 4 C 6.2504839 4 4 6.2504839 4 9 L 4 41 C 4 43.749516 6.2504839 46 9 46 L 41 46 C 43.749516 46 46 43.749516 46 41 L 46 9 C 46 6.2504839 43.749516 4 41 4 L 9 4 z M 9 6 L 41 6 C 42.668484 6 44 7.3315161 44 9 L 44 41 C 44 42.668484 42.668484 44 41 44 L 9 44 C 7.3315161 44 6 42.668484 6 41 L 6 9 C 6 7.3315161 7.3315161 6 9 6 z M 23.429688 9 A 1.0001 1.0001 0 0 0 22.449219 9.8066406 L 21.603516 14.107422 C 20.891022 14.330715 20.22708 14.608165 19.615234 14.941406 L 15.966797 12.548828 A 1.0001 1.0001 0 0 0 14.710938 12.679688 L 12.589844 14.806641 A 1.0001 1.0001 0 0 0 12.460938 16.058594 L 14.847656 19.716797 C 14.51555 20.329946 14.238789 20.995905 14.015625 21.708984 L 9.8183594 22.480469 A 1.0001 1.0001 0 0 0 9 23.464844 L 9 26.455078 A 1.0001 1.0001 0 0 0 9.8066406 27.4375 L 14.09375 28.283203 C 14.316845 28.999283 14.594012 29.667836 14.927734 30.283203 L 12.541016 33.941406 A 1.0001 1.0001 0 0 0 12.669922 35.193359 L 14.791016 37.318359 A 1.0001 1.0001 0 0 0 16.046875 37.449219 L 19.695312 35.056641 C 20.307243 35.389812 20.971128 35.669249 21.683594 35.892578 L 22.527344 40.191406 A 1.0001 1.0001 0 0 0 23.507812 41 L 26.492188 41 A 1.0001 1.0001 0 0 0 27.472656 40.193359 L 28.318359 35.892578 C 29.030853 35.669285 29.694795 35.391835 30.306641 35.058594 L 33.955078 37.451172 A 1.0001 1.0001 0 0 0 35.210938 37.320312 L 37.332031 35.193359 A 1.0001 1.0001 0 0 0 37.460938 33.941406 L 35.074219 30.283203 C 35.407549 29.667793 35.684806 28.999393 35.908203 28.283203 L 40.193359 27.4375 A 1.0001 1.0001 0 0 0 41 26.457031 L 41 23.464844 A 1.0001 1.0001 0 0 0 40 22.464844 L 39.947266 22.464844 L 35.748047 21.636719 C 35.525156 20.921341 35.249361 20.253506 34.916016 19.638672 L 37.302734 15.978516 A 1.0001 1.0001 0 0 0 37.173828 14.726562 L 35.052734 12.601562 A 1.0001 1.0001 0 0 0 33.794922 12.470703 L 30.146484 14.863281 C 29.536703 14.531297 28.875521 14.254329 28.166016 14.03125 L 27.398438 9.8203125 A 1.0001 1.0001 0 0 0 26.414062 9 L 23.429688 9 z M 24.251953 11 L 25.580078 11 L 26.292969 14.904297 A 1.0001 1.0001 0 0 0 27.066406 15.701172 C 28.012821 15.904221 28.847821 16.317085 29.755859 16.847656 A 1.0001 1.0001 0 0 0 30.808594 16.820312 L 34.210938 14.589844 L 35.185547 15.566406 L 32.957031 18.980469 A 1.0001 1.0001 0 0 0 32.931641 20.029297 C 33.460965 20.938772 33.871861 21.779586 34.074219 22.728516 A 1.0001 1.0001 0 0 0 34.859375 23.5 L 39 24.316406 L 39 25.634766 L 35.017578 26.421875 A 1.0001 1.0001 0 0 0 34.232422 27.193359 C 34.029081 28.142859 33.618442 28.982696 33.089844 29.892578 A 1.0001 1.0001 0 0 0 33.117188 30.939453 L 35.34375 34.355469 L 34.371094 35.332031 L 30.966797 33.101562 A 1.0001 1.0001 0 0 0 29.914062 33.074219 C 29.007565 33.604453 28.171146 34.015675 27.224609 34.21875 A 1.0001 1.0001 0 0 0 26.453125 35.003906 L 25.669922 39 L 24.332031 39 L 23.548828 35.003906 A 1.0001 1.0001 0 0 0 22.777344 34.21875 C 21.830929 34.015701 20.995929 33.602837 20.087891 33.072266 A 1.0001 1.0001 0 0 0 19.035156 33.099609 L 15.630859 35.330078 L 14.658203 34.353516 L 16.884766 30.939453 A 1.0001 1.0001 0 0 0 16.912109 29.890625 C 16.382788 28.981153 15.971889 28.142289 15.769531 27.193359 A 1.0001 1.0001 0 0 0 14.984375 26.419922 L 11 25.634766 L 11 24.296875 L 14.892578 23.582031 A 1.0001 1.0001 0 0 0 15.689453 22.806641 C 15.892794 21.857141 16.303433 21.017304 16.832031 20.107422 A 1.0001 1.0001 0 0 0 16.804688 19.060547 L 14.578125 15.644531 L 15.552734 14.667969 L 18.955078 16.898438 A 1.0001 1.0001 0 0 0 20.007812 16.925781 C 20.91431 16.395547 21.750729 15.984325 22.697266 15.78125 A 1.0001 1.0001 0 0 0 23.46875 14.996094 L 24.251953 11 z M 25 19 C 21.704545 19 19 21.704545 19 25 C 19 28.295455 21.704545 31 25 31 C 28.295455 31 31 28.295455 31 25 C 31 21.704545 28.295455 19 25 19 z M 25 21 C 27.204545 21 29 22.795455 29 25 C 29 27.204545 27.204545 29 25 29 C 22.795455 29 21 27.204545 21 25 C 21 22.795455 22.795455 21 25 21 z"></path>
+                              </svg>
                         </a>
                     </td>
 
@@ -223,35 +223,35 @@
             <div class="col-span-6 sm:col-span-3">
               <label for="id_first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
                 Name</label>
-              <input type="text" name="first_name" id="id_first_name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bonnie" />
+              <input type="text" name="first_name" id="id_first_name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Bonnie" />
             </div>
             <div class="col-span-6 sm:col-span-3">
               <label for="id_last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
                 Name</label>
-              <input type="text" name="last_name" id="id_last_name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Green" />
+              <input type="text" name="last_name" id="id_last_name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Green" />
             </div>
             <div class="col-span-6 sm:col-span-3">
               <label for="id_email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-              <input type="email" name="email" id="id_email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@company.com" />
+              <input type="email" name="email" id="id_email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="example@company.com" />
             </div>
             <div class="col-span-6 sm:col-span-3">
               <label for="id_scorm_consumed" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Scorm Consumed</label>
-              <input type="number" name="scorm_consumed" id="id_scorm_consumed" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="0" disabled/>
+              <input type="number" name="scorm_consumed" id="id_scorm_consumed" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500 cursor-not-allowed" placeholder="0" disabled/>
             </div>
             <div class="col-span-6 sm:col-span-3">
               <label for="id_learner_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Learner ID</label>
-              <input type="text" name="learner_id" id="id_learner_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="0000" disabled/>
+              <input type="text" name="learner_id" id="id_learner_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500 cursor-not-allowed" placeholder="0000" disabled/>
             </div>
             <div class="col-span-6 sm:col-span-3">
               <label for="id_cloudscorm_user_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cloudscorm User ID</label>
-              <input type="text" name="cloudscorm_user_id" id="id_cloudscorm_user_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" placeholder="0000" disabled/>
+              <input type="text" name="cloudscorm_user_id" id="id_cloudscorm_user_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-600 focus:border-purple-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500 cursor-not-allowed" placeholder="0000" disabled/>
             </div>
           </div>
         </div>
   
         <!-- Modal footer -->
         <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-          <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <button type="submit" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
             Save all
           </button>
         </div>

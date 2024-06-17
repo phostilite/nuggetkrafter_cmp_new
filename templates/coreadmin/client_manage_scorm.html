@@ -13,7 +13,7 @@
             <nav class="flex mb-2.5" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="{% url 'client_list' %}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="{% url 'client_list' %}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-purple-600 dark:text-gray-400 dark:hover:text-white">
                     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                     </svg>
@@ -25,7 +25,7 @@
                       <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                       </svg>
-                      <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Manage SCORM</a>
+                      <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-purple-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Manage SCORM</a>
                     </div>
                   </li>
                 </ol>
@@ -39,8 +39,8 @@
                   </a>
                 </li>
                 <li class="me-2">
-                    <a href="{% url 'manage_scorm' client.id %}" class="inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group" aria-current="page">
-                      <svg class="w-4 h-4 me-2 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                    <a href="{% url 'manage_scorm' client.id %}" class="inline-flex items-center justify-center p-4 text-purple-600 border-b-2 border-purple-600 rounded-t-lg active dark:text-purple-500 dark:border-purple-500 group" aria-current="page">
+                      <svg class="w-4 h-4 me-2 text-purple-600 dark:text-purple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                         <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
                       </svg>Manage SCORM
                     </a>
@@ -77,31 +77,31 @@
                     <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input id="filter-radio-example-1" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="filter-radio-example-1" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-1" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last day</label>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input checked id="filter-radio-example-2" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input checked id="filter-radio-example-2" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-2" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 7 days</label>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input id="filter-radio-example-3" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="filter-radio-example-3" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-3" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last 30 days</label>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input id="filter-radio-example-4" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="filter-radio-example-4" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-4" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last month</label>
                         </div>
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                        <input id="filter-radio-example-5" type="radio" value name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <input id="filter-radio-example-5" type="radio" value name="filter-radio" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                         <label for="filter-radio-example-5" class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last year</label>
                         </div>
                     </li>
@@ -115,7 +115,7 @@
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <input type="text" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for SCORM's" />
+                <input type="text" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Search for SCORM's" />
                 </div>
             </div>
 
@@ -133,9 +133,9 @@
                 <tbody>
                   {% for assignment in scorm_assignments %}
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                      <th scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                          {{ assignment.scorm_asset.title }}
-                      </th>
+                      <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                          <strong>{{ assignment.scorm_asset.title }}</strong>
+                      </td>
                       <td class="px-6 py-4">{{ assignment.date_assigned }}</td>
                       <td class="px-6 py-4">{{ assignment.validity_end_date }}</td>
                       <td class="px-6 py-4">{{ assignment.number_of_seats }}</td>
@@ -150,6 +150,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 50 50">
                               <path d="M 25 2 C 12.308594 2 2 12.308594 2 25 C 2 37.691406 12.308594 48 25 48 C 37.691406 48 48 37.691406 48 25 C 48 12.308594 37.691406 2 25 2 Z M 25 4 C 36.609375 4 46 13.390625 46 25 C 46 36.609375 36.609375 46 25 46 C 13.390625 46 4 36.609375 4 25 C 4 13.390625 13.390625 4 25 4 Z M 25 11 C 17.28125 11 11 17.28125 11 25 L 13 25 C 13 18.359375 18.359375 13 25 13 C 28.574219 13 31.773438 14.5625 33.96875 17.03125 L 31 20 L 38 20 L 38 13 L 35.40625 15.59375 C 32.839844 12.757813 29.117188 11 25 11 Z M 37 25 C 37 31.640625 31.640625 37 25 37 C 21.417969 37 18.226563 35.449219 16.03125 32.96875 L 19 30 L 12 30 L 12 37 L 14.625 34.375 C 17.183594 37.214844 20.882813 39 25 39 C 32.71875 39 39 32.71875 39 25 Z"></path>
                             </svg>
+                          </a>
+                          <a href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 50 50">
+                                <path d="M 24 9 C 20.421992 9 17.5 11.921995 17.5 15.5 C 17.5 19.078005 20.421992 22 24 22 C 27.578008 22 30.5 19.078005 30.5 15.5 C 30.5 11.921995 27.578008 9 24 9 z M 24 11 C 26.497128 11 28.5 13.002873 28.5 15.5 C 28.5 17.997127 26.497128 20 24 20 C 21.502872 20 19.5 17.997127 19.5 15.5 C 19.5 13.002873 21.502872 11 24 11 z M 10 14 C 8.4166671 14 7.1018922 14.629756 6.2519531 15.585938 C 5.402014 16.542119 5 17.777778 5 19 C 5 20.222222 5.402014 21.457881 6.2519531 22.414062 C 7.1018922 23.370244 8.4166671 24 10 24 C 11.583333 24 12.898108 23.370244 13.748047 22.414062 C 14.597986 21.457881 15 20.222222 15 19 C 15 17.777778 14.597986 16.542119 13.748047 15.585938 C 12.898108 14.629755 11.583333 14 10 14 z M 38 14 C 36.416667 14 35.101892 14.629756 34.251953 15.585938 C 33.402014 16.542119 33 17.777778 33 19 C 33 20.222222 33.402014 21.457881 34.251953 22.414062 C 35.101892 23.370244 36.416667 24 38 24 C 39.583333 24 40.898108 23.370244 41.748047 22.414062 C 42.597986 21.457881 43 20.222222 43 19 C 43 17.777778 42.597986 16.542119 41.748047 15.585938 C 40.898108 14.629755 39.583333 14 38 14 z M 10 16 C 11.083333 16 11.768559 16.370244 12.251953 16.914062 C 12.735347 17.457881 13 18.222222 13 19 C 13 19.777778 12.735347 20.542119 12.251953 21.085938 C 11.768559 21.629756 11.083333 22 10 22 C 8.9166674 22 8.2314405 21.629756 7.7480469 21.085938 C 7.2646532 20.542119 7 19.777778 7 19 C 7 18.222222 7.2646532 17.457881 7.7480469 16.914062 C 8.2314405 16.370244 8.9166674 16 10 16 z M 38 16 C 39.083333 16 39.768559 16.370244 40.251953 16.914062 C 40.735347 17.457881 41 18.222222 41 19 C 41 19.777778 40.735347 20.542119 40.251953 21.085938 C 39.768559 21.629756 39.083333 22 38 22 C 36.916667 22 36.231441 21.629756 35.748047 21.085938 C 35.264653 20.542119 35 19.777778 35 19 C 35 18.222222 35.264653 17.457881 35.748047 16.914062 C 36.231441 16.370244 36.916667 16 38 16 z M 24 25 C 20.98398 25 18.15819 26.088758 15.958984 27.943359 C 14.273224 26.712424 12.200306 26 10 26 C 5.6853529 26 1.8435826 28.728194 0.49804688 32.771484 L 0.1640625 33.771484 C -0.52259829 35.835776 1.08905 38 3.2675781 38 L 8 38 A 1.0001 1.0001 0 1 0 8 36 L 3.2675781 36 C 2.3661063 36 1.7931608 35.214005 2.0625 34.404297 L 2.3945312 33.402344 C 3.4649956 30.185634 6.5266471 28 10 28 C 11.657136 28 13.216988 28.504511 14.515625 29.375 C 13.476177 30.590912 12.660011 32.017617 12.142578 33.603516 L 11.716797 34.904297 C 10.905862 37.390365 12.799011 40 15.414062 40 L 32.585938 40 C 35.200989 40 37.093524 37.390386 36.28125 34.904297 L 35.857422 33.603516 C 35.340302 32.017547 34.523826 30.590925 33.484375 29.375 C 34.783012 28.504511 36.342864 28 38 28 C 41.473353 28 44.535004 30.185634 45.605469 33.402344 L 45.9375 34.404297 C 46.206839 35.214005 45.633894 36 44.732422 36 L 40 36 A 1.0001 1.0001 0 1 0 40 38 L 44.732422 38 C 46.91095 38 48.522598 35.835776 47.835938 33.771484 L 47.501953 32.771484 C 46.156417 28.728194 42.314647 26 38 26 C 35.799694 26 33.726776 26.712424 32.041016 27.943359 C 29.841706 26.088774 27.01602 25 24 25 z M 24 27 C 28.536131 27 32.54908 29.912516 33.955078 34.224609 L 34.380859 35.525391 C 34.788586 36.773301 33.898885 38 32.585938 38 L 15.414062 38 C 14.101116 38 13.212075 36.773323 13.619141 35.525391 L 14.042969 34.224609 C 15.449932 29.912358 19.463869 27 24 27 z"></path>
+                              </svg>
                           </a>
                         </td>
                   </tr>
@@ -182,5 +187,6 @@
 </div>
 
 <script src="{% static 'script/coreadmin/sync_scorm.js' %}"></script>
+<script src="{% static 'script/coreadmin/client_manage_scorm.js' %}"></script>    
 
 {% endblock %}

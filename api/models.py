@@ -13,6 +13,21 @@ class Statistics(models.Model):
     resets = models.IntegerField(default=0)
     status_checks = models.IntegerField(default=0)
 
+    def clients_count(self):
+        self.clients = Client.objects.count()
+
+    def users_count(self):
+        self.users = ClientUser.objects.count()
+
+    def scorm_packages_count(self):
+        self.scorm_packages = ScormAsset.objects.count()
+
+    def assignments_count(self):
+        self.assignments = ScormAssignment.objects.count()
+
+    def __str__(self):
+        return f'{self.clients} - {self.users} - {self.scorm_packages} - {self.assignments} - {self.resets} - {self.status_checks}'
+
 
 class Activity(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)

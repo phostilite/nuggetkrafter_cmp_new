@@ -19,6 +19,7 @@ from .models import ScormAsset, ScormAssignment, ScormResponse, UserScormMapping
 from .forms import AssignSCORMForm, ScormAssetForm
 from api.models import Activity, Notification
 
+
 def get_all_scorms(request):
     try:
         scorms = ScormAsset.objects.all()
@@ -52,7 +53,7 @@ def download_scorm(request, client_id, scorm_id):
         return HttpResponse(f"An error occurred: {str(e)}", status=500)
 
     response = FileResponse(file, content_type="application/zip")
-    filename = f"{client.first_name}_{client_id}_{scorm.title}_wrapper.zip"  
+    filename = f"{client.first_name}_{client_id}_{scorm.title}_wrapper.zip"
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
 
     Activity.objects.create(
@@ -61,6 +62,7 @@ def download_scorm(request, client_id, scorm_id):
         timestamp=datetime.now()
     )
     return response
+
 
 class ScormUploadView(CreateView):
     model = ScormAsset
@@ -103,6 +105,12 @@ class ScormUploadView(CreateView):
                 if response_data.get("status") is True:
                     self.object.scorm_id = response_data.get("scorm")
                     self.object.save()
+
+                    Activity.objects.create(
+                        user=self.request.user,
+                        activity_type=f'uploaded SCORM: {self.object.title} to cloudscorm',
+                        timestamp=datetime.now()
+                    )
                     logger.info(f"SCORM uploaded successfully: {response_data.get('message')}")
                 else:
                     logger.error(f"API request failed: {response_data.get('message')}")

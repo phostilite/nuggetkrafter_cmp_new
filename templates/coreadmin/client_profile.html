@@ -12,7 +12,7 @@
             <nav class="flex mb-2.5" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="{% url 'client_list' %}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="{% url 'client_list' %}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-purple-600 dark:text-gray-400 dark:hover:text-white">
                     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                     </svg>
@@ -24,15 +24,15 @@
                       <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                       </svg>
-                      <a href="{% url 'client_profile' client.id %}" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Profile</a>
+                      <a href="{% url 'client_profile' client.id %}" class="ms-1 text-sm font-medium text-gray-700 hover:text-purple-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Profile</a>
                     </div>
                   </li>
                 </ol>
             </nav>
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                 <li class="me-2">
-                  <a href="{% url 'client_profile' client.id %}" class="inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group">
-                    <svg class="w-4 h-4 me-2 text-blue-600 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <a href="{% url 'client_profile' client.id %}" class="inline-flex items-center justify-center p-4 text-purple-600 border-b-2 border-purple-600 rounded-t-lg active dark:text-purple-500 dark:border-purple-500 group">
+                    <svg class="w-4 h-4 me-2 text-purple-600 dark:text-purple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
                     </svg>Client Profile
                   </a>
@@ -59,6 +59,28 @@
                   </a>
                 </li>
               </ul>
+            
+            <!-- Profile Details Card -->
+            <div class="mt-5">
+                <div class="max-w-4xl p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-400"><strong>First Name:</strong> {{ client.first_name }}</p>
+                            <p class="mt-5 text-gray-700 dark:text-gray-400"><strong>Last Name:</strong> {{ client.last_name }}</p>
+                            <p class="mt-5 text-gray-700 dark:text-gray-400"><strong>Email:</strong> {{ client.email }}</p>
+                            <p class="mt-5 text-gray-700 dark:text-gray-400"><strong>Contact Phone:</strong> {{ client.contact_phone }}</p>
+                            <p class="mt-5 text-gray-700 dark:text-gray-400"><strong>Company:</strong> {{ client.company }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-400"><strong>Created At:</strong> {{ client.created_at }}</p>
+                            <p class="mt-5 text-gray-700 dark:text-gray-400"><strong>Domains:</strong> {{ client.domains }}</p>
+                            <p class="mt-5 text-gray-700 dark:text-gray-400"><strong>LMS URL:</strong> <a href="{{ client.lms_url }}" class="text-purple-600 hover:text-purple-800">{{ client.lms_url }}</a></p>
+                            <p class="mt-5 text-gray-700 dark:text-gray-400"><strong>LMS API Key:</strong> {{ client.lms_api_key }}</p>
+                            <p class="mt-5 text-gray-700 dark:text-gray-400"><strong>LMS API Secret:</strong> {{ client.lms_api_secret }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>        

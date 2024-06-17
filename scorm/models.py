@@ -1,5 +1,8 @@
+from django.utils import timezone
+
 from django.db import models
 from clients.models import Client, ClientUser
+
 
 class ScormAsset(models.Model):
     title = models.CharField(max_length=200)
@@ -12,7 +15,8 @@ class ScormAsset(models.Model):
     is_deleted = models.BooleanField(default=False)
     scorm_id = models.IntegerField(unique=True, null=True)
     launch_url = models.URLField(blank=True, null=True)
-    cover_photo = models.ImageField(upload_to="scorm_uploads/cover_photos/", blank=True, null=True, default="scorm_uploads/cover_photos/default.png")
+    cover_photo = models.ImageField(upload_to="scorm_uploads/cover_photos/", blank=True, null=True,
+                                    default="scorm_uploads/cover_photos/default.png")
 
     def __str__(self):
         return f"{self.title} - {self.scorm_id} - {self.id}"
@@ -46,10 +50,11 @@ class ScormAssignment(models.Model):
     validity_start_date = models.DateTimeField(blank=True, null=True)
     validity_end_date = models.DateTimeField(blank=True, null=True)
     client_scorm_file = models.FileField(upload_to='client_scorm_files/', null=True, blank=True)
-    
+
     def __str__(self):
         return f"{self.client} - {self.scorm_asset}"
-    
+
+
 class Course(models.Model):
     title = models.CharField(max_length=200)
     code = models.CharField(max_length=50, unique=True)
@@ -62,6 +67,7 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+
 class Module(models.Model):
     TYPE_CHOICES = [
         ('scorm', 'SCORM'),
@@ -73,14 +79,25 @@ class Module(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+
 class UserScormMapping(models.Model):
     user = models.ForeignKey(ClientUser, on_delete=models.CASCADE)
     assignment = models.ForeignKey(ScormAssignment, on_delete=models.CASCADE)
     launch_url = models.URLField(blank=True, null=True)
+    date_assigned = models.DateTimeField(auto_now_add=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.launch_url:
+            base_url = "https://cloudscorm.cloudnuv.com/course"
+            scorm_id = self.assignment.scorm_asset.scorm_id
+            cloudscorm_user_id = self.user.cloudscorm_user_id
+            self.launch_url = f"{base_url}/{scorm_id}/{cloudscorm_user_id}/online/0-0-0-0-0"
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.user} - {self.assignment}"
+
 
 class UserScormStatus(models.Model):
     client_user = models.ForeignKey(ClientUser, on_delete=models.SET_NULL, null=True, blank=True)
@@ -92,8 +109,7 @@ class UserScormStatus(models.Model):
     score = models.CharField(max_length=255, blank=True, null=True)
     attempt = models.IntegerField(default=1)
     created_at = models.DateTimeField(null=True, blank=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.JSONField(default=list, blank=True, null=True)
 
     def __str__(self):
         return f"UserScormStatus for {self.client_user} and {self.scorm_name}"
-    

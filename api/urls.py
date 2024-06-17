@@ -13,4 +13,9 @@ urlpatterns = [
     path('activities/', views.activities_view, name='activities_view'),
     path('client_users/', views.fetch_client_users, name='fetch_client_users'),
     path('clients/', views.fetch_clients, name='fetch_clients'),
+
+    path('check_username/<str:username>', views.check_username, name='check_username'),
+
+    path('user_scorm_status_json/<int:user_scorm_status_id>/', views.fetch_user_scorm_status, name='user_scorm_status'),
+    path('fetch_user_scorm_status_chart_data/<int:user_scorm_status_id>/', views.fetch_user_scorm_status_chart_data, name='fetch_user_scorm_status_chart_data'),
 ]

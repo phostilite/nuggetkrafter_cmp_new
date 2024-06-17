@@ -60,3 +60,4 @@ def logout_view(request):
     logout(request)
     logger.info(f'User {username} logged out')
     return redirect('login')
+

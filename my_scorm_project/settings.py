@@ -160,8 +160,8 @@ CACHES = {
     }
 }
 
-API_URL1 = os.getenv('API_URL1')
-API_TOKEN1 = os.getenv('API_TOKEN2')
+API_URL = os.getenv('API_URL')
+API_TOKEN = os.getenv('API_TOKEN')
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')

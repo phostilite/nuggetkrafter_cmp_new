@@ -5,9 +5,12 @@ import logging
 from datetime import datetime, timedelta
 import random
 import time
+from collections import defaultdict
+import pytz
 
 # Third party imports
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -18,6 +21,8 @@ import boto3
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
+from django.db.models import JSONField
+from django.utils.dateparse import parse_datetime
 
 # Local application imports
 from clients.models import Client, ClientUser
@@ -84,7 +89,7 @@ def validate_and_launch(request):
     )
 
     # CloudScorm Sync
-    bearer_token = settings.API_TOKEN1
+    bearer_token = settings.API_TOKEN
     if not client_user.cloudscorm_user_id:
         cloudscorm_user_data = create_user_on_cloudscorm(learner_id, bearer_token)
         logger.info(f'CloudScorm User Data: {cloudscorm_user_data}')
@@ -144,7 +149,8 @@ def user_scorm_status(request):
             logger.error("Invalid referring URL")
             return JsonResponse({"error": "Invalid referring URL"}, status=400)
 
-        headers = {'Authorization': f'Bearer {settings.API_TOKEN1}'}
+        bearer_token = 'c1ff48c3e772fdc4363b283728fa37f992fea64fc8518cbd502812427d0a9186'
+        headers = {'Authorization': f'Bearer {bearer_token}'}
         url = f"https://cloudscorm.cloudnuv.com/user-status?user_id={client_user.cloudscorm_user_id}&scorm_id={scorm.scorm_id}"
         response = requests.post(url, headers=headers)
 
@@ -159,10 +165,24 @@ def user_scorm_status(request):
 
             if not reports:
                 logger.error("Reports data is empty")
-                return JsonResponse({"error": "Reports data is empty"}, status=400)
+                return JsonResponse({"error": "Reports data is empty"}, status=200)
 
             user_scorm_status = None
+            updated_at_entry = {
+                "updated_at": "",
+                "total_time": "",
+            }
             for report in reports:
+                try:
+                    updated_at_datetime = datetime.strptime(report['updated_at'], '%Y-%m-%d %H:%M:%S')
+                    updated_at_entry = {
+                        "updated_at": updated_at_datetime.isoformat(),
+                        "total_time": report['total_time']
+                    }
+                except ValueError:  # Handle parsing errors
+                    logger.error(f"Invalid updated_at format: {report['updated_at']}")
+                    updated_at_datetime = None  # Or set a default value
+
                 user_scorm_status, created = UserScormStatus.objects.update_or_create(
                     client_user=client_user,
                     _scorm_id=str(report['id']),
@@ -174,13 +194,20 @@ def user_scorm_status(request):
                         'total_time': report['total_time'],
                         'score': report['score'],
                         'created_at': datetime.strptime(report['created_at'], '%Y-%m-%d %H:%M:%S'),
-                        'updated_at': datetime.strptime(report['updated_at'], '%Y-%m-%d %H:%M:%S'),
                     }
                 )
+                updated_at_list = user_scorm_status.updated_at or []  # Handle if it's initially None
+                if updated_at_entry not in updated_at_list:
+                    updated_at_list.append(updated_at_entry)
+                    user_scorm_status.updated_at = updated_at_list
+                    user_scorm_status.save()
                 break
 
             if user_scorm_status:
                 logger.info("User SCORM status updated successfully")
+
+                latest_updated_at_entry = user_scorm_status.updated_at[-1] if user_scorm_status.updated_at else None
+
                 response_data = {
                     'learner_id': user_scorm_status.client_user.cloudscorm_user_id,
                     'learner_name': user_scorm_status.client_user.first_name,
@@ -193,8 +220,13 @@ def user_scorm_status(request):
                     'score': user_scorm_status.score,
                     'attempt': user_scorm_status.attempt,
                     'created_at': user_scorm_status.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-                    'updated_at': user_scorm_status.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
                 }
+
+                if latest_updated_at_entry:
+                    response_data['updated_at'] = latest_updated_at_entry['updated_at']
+                else:
+                    response_data['updated_at'] = None
+
                 return JsonResponse(response_data, status=200)
             else:
                 logger.error("No UserScormStatus object found for the given SCORM ID")
@@ -509,3 +541,65 @@ def fetch_clients(request):
     except Exception as e:
         logger.error(f'An error occurred while fetching clients: {str(e)}')
         return JsonResponse({'error': 'An error occurred while fetching clients'}, status=500)
+
+
+def check_username(request, username):
+    is_available = not User.objects.filter(username=username).exists()
+    return JsonResponse({'is_available': is_available})
+
+
+def fetch_user_scorm_status(request, user_scorm_status_id):
+    user_scorm_status = get_object_or_404(UserScormStatus, id=user_scorm_status_id)
+
+    # Prepare the updated_at data
+    updated_at_data = []
+    for entry in user_scorm_status.updated_at:
+        updated_at_datetime = datetime.strptime(entry['updated_at'], '%Y-%m-%dT%H:%M:%S')
+        updated_at_data.append({
+            'updated_at': updated_at_datetime.strftime('%Y-%m-%d %H:%M:%S'),
+            'total_time': entry['total_time']
+        })
+
+    # Construct the response data
+    data = {
+        'client_user': user_scorm_status.client_user.id,
+        '_scorm_id': user_scorm_status._scorm_id,
+        'scorm_name': user_scorm_status.scorm_name,
+        'attempt': user_scorm_status.attempt,
+        'complete_status': user_scorm_status.complete_status,
+        'satisfied_status': user_scorm_status.satisfied_status,
+        'total_time': user_scorm_status.total_time,  # Latest total_time
+        'score': user_scorm_status.score,
+        'created_at': user_scorm_status.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+        'updated_at': updated_at_data
+    }
+
+    return JsonResponse(data)
+
+
+def fetch_user_scorm_status_chart_data(request, user_scorm_status_id):
+    user_scorm_status = get_object_or_404(UserScormStatus, id=user_scorm_status_id)
+
+    # Get the current date and time in IST timezone
+    ist_timezone = pytz.timezone('Asia/Kolkata')
+    today = datetime.now(ist_timezone).date()
+
+    # Calculate the start of the week (Monday)
+    start_date = today - timedelta(days=today.weekday())
+
+    daily_totals = {}
+
+    for entry in reversed(user_scorm_status.updated_at):
+        date_str = entry['updated_at'].split('T')[0]
+        updated_at_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+        if start_date <= updated_at_date <= today and updated_at_date not in daily_totals:
+            h, m, s = map(float, entry['total_time'].split(':'))
+            total_seconds = h * 3600 + m * 60 + s
+            daily_totals[updated_at_date] = timedelta(seconds=total_seconds)
+
+    chart_data = {
+        'labels': [(start_date + timedelta(days=i)).strftime('%Y-%m-%d') for i in range(7)],
+        'data': [daily_totals.get(start_date + timedelta(days=i), timedelta(0)).total_seconds() / 3600 for i in range(7)]
+    }
+
+    return JsonResponse(chart_data)

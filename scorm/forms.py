@@ -65,3 +65,9 @@ class AssignSCORMForm(forms.ModelForm):
             assignments.append(assignment)
 
         return assignments
+
+
+class ScormUpdateForm(forms.ModelForm):
+    class Meta:
+        model = ScormAsset
+        fields = ["title", "course_code", "category", "duration", "launch_url", "short_description", "long_description"]
