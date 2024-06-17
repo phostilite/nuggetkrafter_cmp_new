@@ -1,11 +1,38 @@
 from django import forms
+from django.contrib.auth.models import User
 
 from .models import Client, ClientUser
+
+
+class ClientForm(forms.ModelForm):
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = Client
+        fields = ['first_name', 'last_name', 'email', 'contact_phone', 'company', 'domains', 'lms_url', 'lms_api_key',
+                  'lms_api_secret', 'password1', 'password2']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+
+        if password1 != password2:
+            raise forms.ValidationError("The two password fields didn’t match.")
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("A user with this email address already exists.")
+        return email
+
 
 class ClientUpdateForm(forms.ModelForm):
     class Meta:
         model = Client
-        fields = ["first_name", "last_name", "email", "contact_phone", "company", "domains", "lms_url", "lms_api_key", "lms_api_secret"]
+        fields = ["first_name", "last_name", "email", "contact_phone", "company", "domains", "lms_url", "lms_api_key",
+                  "lms_api_secret"]
 
     def __init__(self, *args, **kwargs):
         super(ClientUpdateForm, self).__init__(*args, **kwargs)
@@ -30,12 +57,13 @@ class ClientUpdateForm(forms.ModelForm):
             user.last_name = self.cleaned_data["last_name"]
         else:
             user.last_name = ""
-            
+
         user.email = self.cleaned_data["email"]
         if commit:
             user.save()
             client.save()
         return client
+
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:

@@ -9,7 +9,7 @@ class Client(models.Model):
     contact_phone = models.CharField(max_length=20, null=True, blank=True)
     company = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
-    domains = models.TextField(blank=True, null=True, help_text="Enter the domains separated by commas")
+    domains = models.TextField(blank=True, null=True)
     lms_url = models.URLField(blank=True, null=True)
     lms_api_key = models.CharField(max_length=100, blank=True, null=True)
     lms_api_secret = models.CharField(max_length=100, blank=True, null=True)

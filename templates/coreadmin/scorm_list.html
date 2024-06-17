@@ -116,15 +116,85 @@
                         {% endif %}
                     </td>        
                     <td class="px-6 py-4">
-                        <a href="#" class="font-medium" style="color: #4B006E; text-decoration: none;" onmouseover="this.style.color = '#3D0055'; this.style.textDecoration = 'underline'" onmouseout="this.style.color = '#4B006E'; this.style.textDecoration = 'none'" onfocus="this.style.boxShadow = '0 0 0 2px #6F00A1'; this.style.textDecoration = 'none'" onblur="this.style.boxShadow = 'none'; this.style.textDecoration = 'underline'">Edit</a>
+                        <a href="#" class="font-medium edit-scorm-link" data-scorm-id="{{ scorm.id }}" data-modal-target="editScormModal" data-modal-show="editScormModal" style="color: #4B006E; text-decoration: none;" onmouseover="this.style.color = '#3D0055'; this.style.textDecoration = 'underline'" onmouseout="this.style.color = '#4B006E'; this.style.textDecoration = 'none'" onfocus="this.style.boxShadow = '0 0 0 2px #6F00A1'; this.style.textDecoration = 'none'" onblur="this.style.boxShadow = 'none'; this.style.textDecoration = 'underline'">Edit</a>
                     </td>
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
     </div>
+    
+    <!-- Edit SCORM modal -->
+<div id="editScormModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full">
+  
+      <!-- Modal content -->
+      <form class="relative bg-white rounded-lg shadow dark:bg-gray-700" id="scormUpdateForm" method="post">
+        {% csrf_token %}
+  
+        <!-- Modal header -->
+        <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Edit SCORM
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="editScormModal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="p-6 space-y-6">
+          <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-span-3">
+              <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SCORM Title</label>
+              <input type="text" name="title" id="id_title" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="id_course_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course Code</label>
+              <input type="text" name="course_code" id="id_course_code" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="id_category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+              <input type="text" name="category" id="id_category" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="id_duration" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Duration</label>
+              <input type="text" name="duration" id="id_duration" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="id_scorm_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SCORM ID</label>
+              <input type="number" name="scorm_id" id="id_scorm_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-not-allowed" disabled />
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="id_launch_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Launch URL</label>
+              <input type="url" name="launch_url" id="id_launch_url" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            </div>
+          </div>
+            <div class="mb-5">
+                <label for="id_short_description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short Description</label>
+                <textarea id="id_short_description" name="short_description" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"></textarea>
+            </div>
+            <div class="mb-5">
+                <label for="id_long_description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Long Description</label>
+                <textarea id="id_long_description" name="long_description" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"></textarea>
+            </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button type="submit" class="upload-button text-white font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" style="background-color: #4B006E; outline: none;" onmouseover="this.style.backgroundColor = '#3D0055'" onmouseout="this.style.backgroundColor = '#4B006E'" onfocus="this.style.boxShadow = '0 0 0 4px #6F00A1'">
+                  Save All
+          </button> 
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 </div>
     
-<script src="{% static 'script/coreadmin/scorm_list.js' %}"></script>    
+<script src="{% static 'script/coreadmin/scorm_list.js' %}"></script>  
+<script src="{% static 'script/coreadmin/edit_scorm_details.js' %}"></script>    
 {% endblock %}

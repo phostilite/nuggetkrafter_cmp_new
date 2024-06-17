@@ -8,6 +8,7 @@ import time
 
 # Third party imports
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -509,3 +510,8 @@ def fetch_clients(request):
     except Exception as e:
         logger.error(f'An error occurred while fetching clients: {str(e)}')
         return JsonResponse({'error': 'An error occurred while fetching clients'}, status=500)
+
+
+def check_username(request, username):
+    is_available = not User.objects.filter(username=username).exists()
+    return JsonResponse({'is_available': is_available})

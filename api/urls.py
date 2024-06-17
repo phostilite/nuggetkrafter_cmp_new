@@ -13,4 +13,6 @@ urlpatterns = [
     path('activities/', views.activities_view, name='activities_view'),
     path('client_users/', views.fetch_client_users, name='fetch_client_users'),
     path('clients/', views.fetch_clients, name='fetch_clients'),
+
+    path('check_username/<str:username>', views.check_username, name='check_username'),
 ]
