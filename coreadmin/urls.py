@@ -20,6 +20,8 @@ urlpatterns = [
     path('clients/<int:client_id>/details/', views.get_client_details, name='get_client_details'),
     path('clients/<int:client_id>/update/', views.client_update_view, name='client_update_view'),
 
+    path('users/', views.client_user_whole_list, name='user_list'),
+
     path('clients/<int:client_id>/users/', views.client_user_list, name='client_user_list'),
     path('clients/<int:client_id>/users/<int:user_id>/details/', views.get_user_details, name='get_user_details'),
     path('clients/<int:client_id>/users/<int:user_id>/update/', views.user_update_view, name='user_update_view'),

@@ -64,6 +64,18 @@ def client_user_list(request, client_id):
     return render(request, 'coreadmin/client_user_list.html', {'client_users': client_users, 'client': client})
 
 
+def client_user_whole_list(request):
+    try:
+        client_users = ClientUser.objects.all()
+
+        for user in client_users:
+            user.update_scorm_consumed()
+    except ObjectDoesNotExist:
+        messages.error(request, "Error fetching client users")
+        client_users = None
+    return render(request, 'coreadmin/client_user_whole_list.html', {'client_users': client_users})
+
+
 def manage_scorm(request, client_id):
     try:
         scorm_assignments = ScormAssignment.objects.filter(client__id=client_id)

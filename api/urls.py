@@ -18,4 +18,5 @@ urlpatterns = [
 
     path('user_scorm_status_json/<int:user_scorm_status_id>/', views.fetch_user_scorm_status, name='user_scorm_status'),
     path('fetch_user_scorm_status_chart_data/<int:user_scorm_status_id>/', views.fetch_user_scorm_status_chart_data, name='fetch_user_scorm_status_chart_data'),
+    path('fetch_user_scorm_kpi_data/<int:user_scorm_status_id>/', views.fetch_user_scorm_kpi_data, name='fetch_user_scorm_kpi_data'),
 ]

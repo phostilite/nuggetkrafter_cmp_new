@@ -603,3 +603,50 @@ def fetch_user_scorm_status_chart_data(request, user_scorm_status_id):
     }
 
     return JsonResponse(chart_data)
+
+def fetch_user_scorm_kpi_data(request, user_scorm_status_id):
+    user_scorm_status = get_object_or_404(UserScormStatus, id=user_scorm_status_id)
+    ist_timezone = pytz.timezone('Asia/Kolkata')
+    today = datetime.now(ist_timezone).date()
+    start_date = today - timedelta(days=today.weekday())  # Start of the week
+
+    daily_totals = defaultdict(timedelta)
+    active_days = 0
+    total_time_today = timedelta(0)
+
+    for entry in user_scorm_status.updated_at:
+        date_str = entry['updated_at'].split('T')[0]
+        updated_at_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+        if start_date <= updated_at_date <= today:
+            h, m, s = map(float, entry['total_time'].split(':'))
+            day_total = timedelta(hours=h, minutes=m, seconds=s)
+            daily_totals[updated_at_date] += day_total  # Accumulate total time for each day
+            if updated_at_date == today:
+                total_time_today = day_total
+
+    active_days = len([total for total in daily_totals.values() if total > timedelta(0)])
+
+
+    # Exclude today and any zero-activity days for 6-day average
+    six_day_totals = {date: total for date, total in daily_totals.items()
+                      if date != today and total > timedelta(0)}
+    six_day_avg = sum(six_day_totals.values(), timedelta(0)) / len(six_day_totals) if six_day_totals else timedelta(0)
+
+    # Exclude today for 5-day active average
+    five_day_totals = {date: total for date, total in daily_totals.items() if date != today}
+    five_day_avg = sum(sorted(five_day_totals.values(), reverse=True)[:5], timedelta(0)) / 5 if active_days >= 5 else timedelta(0)
+
+    def calculate_percentage_change(today_value, avg_value):
+        if avg_value.total_seconds() == 0:
+            return None
+        change_seconds = (today_value - avg_value).total_seconds()
+        return (change_seconds / avg_value.total_seconds()) * 100
+
+    data = {
+        'total_time_today': total_time_today.total_seconds() / 60,
+        'daily_avg_6_days': six_day_avg.total_seconds() / 3600,
+        'daily_avg_5_active_days': five_day_avg.total_seconds() / 3600,
+        'percent_change_6_day': calculate_percentage_change(total_time_today, six_day_avg),
+        'percent_change_5_day': calculate_percentage_change(total_time_today, five_day_avg)
+    }
+    return JsonResponse(data)

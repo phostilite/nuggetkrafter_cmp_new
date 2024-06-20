@@ -76,12 +76,23 @@
             <!-- Progress Chart -->
             <div class="grid grid-cols-2 gap-4 mb-4 mt-5">
                 <div class="flex justify-center items-center rounded bg-gray-100 dark:bg-gray-800">
-                    <div class="w-full">
+                    <div style="height: 400px;" class="w-full">
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
-                <div class="flex items-center justify-center rounded bg-gray-100 dark:bg-gray-800">
-                    <div style="height: 300px; width: 400px;">
+                <div class="flex flex-col items-center justify-center rounded bg-gray-100 dark:bg-gray-800">
+                    <p id="todayTime" class="text-center text-2xl mt-5 font-bold"></p>
+                    <div style="height: 200px;">
+                        <canvas id="doughnutChart"></canvas>
+                    </div>
+                    <div class="flex items-center justify-center rounded bg-gray-100 dark:bg-gray-800">
+                        <svg id="upArrow" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0,0,256,256" style="fill:#000000;">
+                            <g fill="#00a80b" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M24,3l14,16h-28z"></path><path d="M19,17h10v26h-10z"></path></g></g>
+                        </svg>
+                        <svg id="downArrow" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0,0,256,256" style="fill:#000000;">
+                            <g fill="#656565" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M24,44l-14,-16h28z"></path><path d="M19,4h10v26h-10z"></path></g></g>
+                        </svg>
+                        <p id="percentage" class="text-center text-2xl"><strong></strong></p>
                     </div>
                 </div>
                 <div class="flex items-center justify-center rounded bg-gray-100 h-28 dark:bg-gray-800">
@@ -192,5 +203,146 @@ setInterval(fetchUserScormStatus, 10 * 60 * 1000);
 
     updateChart();  // Initial chart update
     setInterval(updateChart, 300000); // Update every 5 minutes
+</script>
+<script>
+function calculatePercentageChange(userScormStatusId) {
+  return fetch(`/api/user_scorm_status_json/${userScormStatusId}/`)
+    .then(response => response.json())
+    .then(data => {
+      const todayTimes = [];
+      const yesterdayTimes = [];
+      const todayTotalTimes = [];
+      const yesterdayTotalTimes = [];
+
+      const today = new Date().toISOString().split('T')[0];
+      const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+      
+      console.log('TodayTimes:', todayTimes);
+      console.log('YesterdayTimes:', yesterdayTimes);
+
+      data.updated_at.forEach(entry => {
+            const date = entry.updated_at.split(' ')[0];
+            const timeParts = entry.total_time.split(':');
+            const hours = parseFloat(timeParts[0]);
+            const minutes = parseFloat(timeParts[1]) / 60;  // Convert minutes to hours
+            const seconds = parseFloat(timeParts[2]) / 3600;  // Convert seconds to hours
+            const totalTime = hours + minutes + seconds;
+        
+            if (date === today) {
+              todayTimes.push(totalTime);
+              todayTotalTimes.push(entry.total_time);
+            } else if (date === yesterday) {
+              yesterdayTimes.push(totalTime);
+              yesterdayTotalTimes.push(entry.total_time);
+            }
+        });
+      
+      console.log('TodayTotalTimes:', todayTotalTimes);
+        console.log('YesterdayTotalTimes:', yesterdayTotalTimes);
+      
+      let maxTodayTime = Math.max(...todayTimes);
+      let maxYesterdayTime = Math.max(...yesterdayTimes);
+
+      const maxTodayTotalTime = todayTotalTimes.length > 0 ? todayTotalTimes[todayTotalTimes.length - 1] : "00:00:00.00";
+      const maxYesterdayTotalTime = yesterdayTotalTimes.length > 0 ? yesterdayTotalTimes[yesterdayTotalTimes.length - 1] : "00:00:00.00";
+      
+      if (maxYesterdayTime === -Infinity) {
+        maxYesterdayTime = 0;
+      }
+      if (maxTodayTime === -Infinity) {
+        maxTodayTime = 0;
+      }
+
+      let percentageChange;
+      if (maxYesterdayTime === 0 && maxTodayTime > 0) {
+        percentageChange = 100;
+      } else if (maxTodayTime === 0 && maxYesterdayTime > 0) {
+        percentageChange = -100;
+      } else if (maxTodayTime === 0 && maxYesterdayTime === 0) {
+        percentageChange = 0;
+      } else {
+        percentageChange = ((maxTodayTime - maxYesterdayTime) / maxYesterdayTime) * 100;
+      }
+      
+      const result = {
+        percentageChange: percentageChange.toFixed(2),
+        maxTodayTime: maxTodayTime,
+        maxYesterdayTime: maxYesterdayTime,
+        maxTodayTotalTime: maxTodayTotalTime,  
+        maxYesterdayTotalTime: maxYesterdayTotalTime,
+      };
+      
+      console.log('Result:', result);
+
+      return result;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+calculatePercentageChange({{ scorm_status.id }}).then(result => {
+console.log('Result:', result);  
+  const data = {
+    datasets: [{
+      data: [Math.abs(result.percentageChange), 100 - Math.abs(result.percentageChange)],
+      backgroundColor: [result.percentageChange >= 0 ? 'green' : 'red', 'lightgray']
+    }]
+  };
+  
+  console.log('Data:', data);
+
+  const config = {
+    type: 'doughnut',
+    data: data,
+    options: {
+      rotation: -90, // Start angle at 12 o'clock
+      circumference: 180, // Display only a half-circle
+      cutout: '80%', // Make it a ring
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          enabled: false
+        },
+      },
+    }
+  };
+
+  const doughnutChart = new Chart(
+    document.getElementById('doughnutChart'), // Replace with your chart container ID
+    config
+  );
+
+  let changeText = result.percentageChange >= 0 ? 'Increase' : 'Decrease';
+document.getElementById('percentage').innerText = `${result.percentageChange}% ${changeText}`;
+  
+    // Select the SVG elements
+    const upArrow = document.getElementById('upArrow');
+    const downArrow = document.getElementById('downArrow');
+    
+    if (result.percentageChange >= 0) {
+        // If the percentage change is non-negative, show the up arrow and hide the down arrow
+        upArrow.style.display = 'block';
+        downArrow.style.display = 'none';
+    } else {
+        // If the percentage change is negative, hide the up arrow and show the down arrow
+        upArrow.style.display = 'none';
+        downArrow.style.display = 'block';
+    }
+  
+  function formatTime(timeString) {
+      const parts = timeString.split(':');
+      const hours = parseInt(parts[0], 10);
+      const minutes = parseInt(parts[1], 10);
+      const seconds = parseInt(parts[2], 10);
+    
+      return `${hours}hr ${minutes}min ${seconds}sec`;
+  }
+
+  // Select the p element with id "todayTime" and set its text content
+  document.getElementById('todayTime').innerText = formatTime(result.maxTodayTotalTime) + ' Today';
+});
 </script>
 {% endblock %}
