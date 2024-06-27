@@ -21,10 +21,11 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DO_HOST }}  
-          username: nugget   
-          key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
+          username: root 
+          password: ${{ secrets.DO_ACCESS_TOKEN }}
           port: 22
           script: |
+            su - nugget
             cd /home/nugget/nuggerkrafter_cmp_new/ 
             source env/bin/activate  
             pip install -r requirements.txt
