@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xfsdb&_b&t5mi7hmd*gi8f47w*3-c-3830u)0$mmtrp&!0ff5y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cmp.nuggetkrafter.com', '134.209.144.70', '139.59.48.245', 'localhost', '127.0.0.1']
 
 
 # Application definition
