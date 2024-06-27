@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'  
+          python-version: '3.12' 
 
       - name: Deploy to DigitalOcean
         uses: appleboy/ssh-action@master
@@ -26,10 +26,8 @@ jobs:
           port: 22
           script: |
             su - nugget
-            cd nuggetkrafter_cmp_new/
-            source env/bin/activate  
+            cd ~/nuggetkrafter_cmp_new/  
+            source ~/nuggetkrafter_cmp_new/env/bin/activate # Full path 
             pip install -r requirements.txt
             python manage.py collectstatic --noinput
-            git pull origin main       
-            python manage.py migrate   
-
+            python manage.py migrate
