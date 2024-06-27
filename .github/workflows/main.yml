@@ -21,9 +21,8 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DO_HOST }}  
-          username: root 
-          password: ${{ secrets.DO_ACCESS_TOKEN }}
+          username: nugget
+          key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            su - nugget
             /home/nugget/scripts/deploy.sh
