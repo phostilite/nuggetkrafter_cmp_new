@@ -26,8 +26,4 @@ jobs:
           port: 22
           script: |
             su - nugget
-            cd ~/nuggetkrafter_cmp_new/  
-            source ~/nuggetkrafter_cmp_new/env/bin/activate # Full path 
-            pip install -r requirements.txt
-            python manage.py collectstatic --noinput
-            python manage.py migrate
+            /home/nugget/scripts/deploy.sh
