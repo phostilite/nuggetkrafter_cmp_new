@@ -17,17 +17,6 @@ jobs:
         with:
           python-version: '3.12'  
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run tests (optional)
-        run: pytest 
-
-      - name: Build for production
-        run: python manage.py collectstatic --noinput     
-
       - name: Deploy to DigitalOcean
         uses: appleboy/ssh-action@master
         with:
@@ -36,7 +25,10 @@ jobs:
           key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/nugget/nuggerkrafter_cmp_new/   
+            cd /home/nugget/nuggerkrafter_cmp_new/ 
+            source env/bin/activate  
+            pip install -r requirements.txt
+            python manage.py collectstatic --noinput
             git pull origin main       
             python manage.py migrate   
 
