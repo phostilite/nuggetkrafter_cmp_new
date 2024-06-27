@@ -39,10 +39,13 @@ def login_view(request):
                             logger.info(f'Client {username} logged in')
                             return redirect('client_dashboard')
                 else:
+                    logger.error(f'Inactive user {username}')
                     messages.error(request, 'Inactive user')
             else:
+                logger.error(f'Invalid username or password for {username}')
                 messages.error(request, 'Invalid username or password')
         else:
+            logger.error(f'Login form errors: {form.errors.as_json()}')
             messages.error(request, 'Invalid form data')
     else:
         form = LoginForm()

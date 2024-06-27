@@ -1,0 +1,42 @@
+name: Django NuggerKrafter CMP CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'  
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests (optional)
+        run: pytest 
+
+      - name: Build for production
+        run: python manage.py collectstatic --noinput     
+
+      - name: Deploy to DigitalOcean
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DO_HOST }}  
+          username: nugget   
+          key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /home/nugget/nuggerkrafter_cmp_new/   
+            git pull origin main       
+            python manage.py migrate   
+
